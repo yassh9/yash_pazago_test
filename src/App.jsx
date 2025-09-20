@@ -232,7 +232,8 @@ function AppContent() {
   }, [sidebarOpen]);
 
   return (
-    <div className={`min-h-screen transition-colors duration-200 ${isMobile ? 'relative' : 'flex'}`}>
+    <div className={`min-h-screen transition-colors duration-200 ${isMobile ? 'relative overflow-hidden' : 'flex'}`} 
+         style={isMobile ? { height: '100vh', height: '100dvh' } : {}}>
       {/* Mobile overlay when sidebar is open */}
       {isMobile && sidebarOpen && (
         <div 
@@ -297,7 +298,7 @@ function AppContent() {
       )}
 
       {/* Main Content - Full screen with overlay hamburger */}
-      <div className={`relative flex flex-col h-screen transition-all duration-300 ease-in-out ${isMobile ? 'w-full' : 'flex-1'}`}>
+      <div className={`relative flex flex-col transition-all duration-300 ease-in-out ${isMobile ? 'w-full h-full' : 'flex-1 h-screen'}`}>
         {/* Hamburger button - Fixed overlay position */}
         <button 
           className={`
@@ -317,11 +318,11 @@ function AppContent() {
         </button>
         
         {/* Chat Area - Full height */}
-        <div className="flex-1 flex flex-col overflow-hidden h-full">
+        <div className={`flex-1 flex flex-col overflow-hidden ${isMobile ? 'h-full' : 'h-full'}`}>
           {/* Container to limit width on desktop */}
-          <div className={`flex-1 flex flex-col ${isMobile ? 'w-full px-4' : 'max-w-4xl mx-auto w-full px-6'} h-full`}>
+          <div className={`flex-1 flex flex-col ${isMobile ? 'w-full' : 'max-w-4xl mx-auto w-full px-6'} h-full`}>
             {/* Message area - scrollable, takes available space, full height */}
-            <div className="flex-1 overflow-y-auto">
+            <div className={`flex-1 overflow-y-auto ${isMobile ? 'pb-2' : ''}`}>
               <ChatWindow
                 messages={messageData}
                 isLoading={isLoading}
@@ -333,7 +334,7 @@ function AppContent() {
             </div>
             
             {/* Input Area - Fixed at bottom */}
-            <div className="flex-shrink-0">
+            <div className={`flex-shrink-0 ${isMobile ? 'px-4' : ''}`}>
               <Searchbox 
                 SetValue={SetValue} 
                 value={value} 

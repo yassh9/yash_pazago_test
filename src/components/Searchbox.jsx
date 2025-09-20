@@ -15,8 +15,9 @@ export default function Searchbox({ SetValue, value, SetAction, disabled, isMobi
   }
 
   return (
-    <div className={`${colors.bg.secondary} ${isMobile ? 'p-3 pb-safe' : 'p-4'}`}>
-      <form onSubmit={handleSubmit} className={`${isMobile ? 'max-w-full px-2' : `${maxWidth} mx-auto`}`}>
+    <div className={`${colors.bg.secondary} ${isMobile ? 'p-3 pb-6' : 'p-4'}`} 
+         style={isMobile ? { paddingBottom: 'calc(1.5rem + env(safe-area-inset-bottom))' } : {}}>
+      <form onSubmit={handleSubmit} className={`${isMobile ? 'max-w-full' : `${maxWidth} mx-auto`}`}>
         <div className={`
           relative rounded-xl border-2 transition-all duration-200 
           ${colors.border.secondary} ${colors.bg.input}
