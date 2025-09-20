@@ -231,6 +231,10 @@ function AppContent() {
     setSidebarOpen(!sidebarOpen);
   }, [sidebarOpen]);
 
+  const handleSuggestionClick = useCallback((suggestion) => {
+    handleUserMessage(suggestion);
+  }, [handleUserMessage]);
+
   return (
     <div className={`min-h-screen transition-colors duration-200 ${isMobile ? 'relative overflow-hidden' : 'flex'}`} 
          style={isMobile ? { height: '100vh', height: '100dvh' } : {}}>
@@ -330,6 +334,7 @@ function AppContent() {
                 isMobile={isMobile}
                 sidebarOpen={sidebarOpen}
                 currentSessionId={currentSessionId}
+                onSuggestionClick={handleSuggestionClick}
               />
             </div>
             

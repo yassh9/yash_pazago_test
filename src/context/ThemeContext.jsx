@@ -64,9 +64,9 @@ export const ThemeProvider = ({ children }) => {
     },
     // Message colors
     message: {
-      user: 'bg-blue-500 text-white',
+      user: 'bg-white text-gray-900',
       bot: isDark ? 'bg-gray-700 text-gray-100' : 'bg-gray-200 text-gray-800',
-      userHover: 'hover:bg-blue-600',
+      userHover: 'hover:bg-gray-50',
       botHover: isDark ? 'hover:bg-gray-600' : 'hover:bg-gray-300',
     },
     // Button colors

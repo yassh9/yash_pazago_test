@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from "react";
 import { useTheme } from '../context/ThemeContext';
+import SuggestionButtons from './SuggestionButtons';
 
 export default function ChatWindow({ 
   messages = [], 
@@ -7,7 +8,8 @@ export default function ChatWindow({
   isStreaming, 
   isMobile = false,
   sidebarOpen = false,
-  currentSessionId = null
+  currentSessionId = null,
+  onSuggestionClick = () => {}
 }) {
   const { colors } = useTheme();
   const messagesEndRef = useRef(null);
@@ -16,7 +18,18 @@ export default function ChatWindow({
   const safeMessages = Array.isArray(messages) ? messages : [];
   
   // Calculate max width based on sidebar state - reduce by 15% when sidebar is hidden
-  const maxWidth = sidebarOpen ? 'max-w-4xl' : 'max-w-3xl';
+  const maxWidth = isMobile ? (sidebarOpen ? 'max-w-4xl' : 'max-w-3xl') : '';
+  const webWidth = isMobile ? {} : { width: '721px' };
+  
+  // Show suggestions when: no messages, or last message is from bot and not loading/streaming
+  const shouldShowSuggestions = safeMessages.length === 0 || 
+    (safeMessages.length > 0 && 
+     !safeMessages[safeMessages.length - 1].isUser && 
+     !isLoading && 
+     !isStreaming);
+  
+  // Check if it's a new chat (no messages)
+  const isNewChat = safeMessages.length === 0;
   
   // Auto-scroll to bottom when new messages arrive or when streaming
   useEffect(() => {
@@ -36,16 +49,17 @@ export default function ChatWindow({
 
   return (
     <div className="w-full h-full">
-      <div className={`w-full h-full overflow-y-auto px-4 md:px-6 pt-0 pb-4 space-y-6 ${colors.bg.secondary} scrollbar-none`}>
+      <div className={`w-full h-full overflow-y-auto px-4 md:px-6 pt-8 pb-4 space-y-6 ${colors.bg.secondary} scrollbar-none`}>
         {safeMessages.map((message, index) => (
           <div
             key={index}
-            className={`${maxWidth} mx-auto flex ${
+            className={`${isMobile ? maxWidth : ''} mx-auto flex ${
               message.isUser ? "justify-end" : "justify-start"
             }`}
+            style={webWidth}
           >
             <div
-              className={`px-4 py-3 max-w-[80%] rounded-2xl transition-all duration-200 ${
+              className={`px-4 py-3 max-w-[80%] rounded-xl transition-all duration-200 ${
                 message.isUser
                   ? `${colors.message.bot} ml-auto`
                   : `bg-transparent mr-auto`
@@ -59,7 +73,7 @@ export default function ChatWindow({
         ))}
         
         {isLoading && (
-          <div className={`${maxWidth} mx-auto flex justify-start`}>
+          <div className={`${isMobile ? maxWidth : ''} mx-auto flex justify-start`} style={webWidth}>
             <div className="px-4 py-3 bg-transparent flex items-center space-x-2">
               <div className="flex space-x-1">
                 <div className="w-2 h-2 bg-current rounded-full animate-bounce opacity-60"></div>
@@ -70,6 +84,14 @@ export default function ChatWindow({
             </div>
           </div>
         )}
+        
+        {/* Suggestion Buttons */}
+        <SuggestionButtons 
+          onSuggestionClick={onSuggestionClick}
+          isVisible={shouldShowSuggestions}
+          isMobile={isMobile}
+          isNewChat={isNewChat}
+        />
         
         {/* Invisible element for auto-scroll */}
         <div ref={messagesEndRef} />

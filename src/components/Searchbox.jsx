@@ -16,16 +16,17 @@ export default function Searchbox({ SetValue, value, SetAction, disabled, isMobi
 
   return (
     <div className={`${colors.bg.secondary} ${isMobile ? 'p-3' : 'p-4'}`}>
-      <form onSubmit={handleSubmit} className={`${isMobile ? 'max-w-full' : `${maxWidth} mx-auto`}`}>
+      <form onSubmit={handleSubmit} className={`${isMobile ? 'max-w-full' : 'mx-auto'}`} style={isMobile ? {} : { width: '721px' }}>
         <div className={`
           relative rounded-2xl border transition-all duration-200 
           ${colors.border.secondary} ${colors.bg.input}
           focus-within:${colors.border.focus}
-          ${isMobile ? 'min-h-[56px]' : 'min-h-[64px]'}
+          ${isMobile ? 'min-h-[56px]' : ''}
           shadow-sm
         `}
         style={{
-          boxShadow: '-4px 4px 8px rgba(0, 0, 0, 0.1), -2px 2px 4px rgba(0, 0, 0, 0.05)'
+          boxShadow: '-4px 4px 8px rgba(0, 0, 0, 0.1), -2px 2px 4px rgba(0, 0, 0, 0.05)',
+          ...(isMobile ? {} : { height: '112px' })
         }}>
           <input
             type="text"
@@ -40,7 +41,7 @@ export default function Searchbox({ SetValue, value, SetAction, disabled, isMobi
               ${colors.text.primary}
               focus:outline-none
               disabled:opacity-50 disabled:cursor-not-allowed
-              ${isMobile ? 'min-h-[56px]' : 'min-h-[64px]'}
+              ${isMobile ? 'min-h-[56px]' : 'h-full'}
             `}
           />
           
