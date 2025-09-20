@@ -318,11 +318,11 @@ function AppContent() {
         </button>
         
         {/* Chat Area - Full height */}
-        <div className={`flex-1 flex flex-col overflow-hidden ${isMobile ? 'h-full' : 'h-full'}`}>
+        <div className={`flex-1 flex flex-col overflow-hidden ${isMobile ? 'h-full relative' : 'h-full'}`}>
           {/* Container to limit width on desktop */}
           <div className={`flex-1 flex flex-col ${isMobile ? 'w-full' : 'max-w-4xl mx-auto w-full px-6'} h-full`}>
             {/* Message area - scrollable, takes available space, full height */}
-            <div className={`flex-1 overflow-y-auto ${isMobile ? 'pb-2' : ''}`}>
+            <div className={`flex-1 overflow-y-auto ${isMobile ? 'pb-24 mb-2' : ''}`}>
               <ChatWindow
                 messages={messageData}
                 isLoading={isLoading}
@@ -333,8 +333,9 @@ function AppContent() {
               />
             </div>
             
-            {/* Input Area - Fixed at bottom */}
-            <div className={`flex-shrink-0 ${isMobile ? 'px-4' : ''}`}>
+            {/* Input Area - Fixed at bottom with extra mobile spacing */}
+            <div className={`${isMobile ? 'fixed bottom-0 left-0 right-0 z-30 px-4 py-3' : 'flex-shrink-0'}`} 
+                 style={isMobile ? { paddingBottom: 'calc(1rem + env(safe-area-inset-bottom) + 60px)' } : {}}>
               <Searchbox 
                 SetValue={SetValue} 
                 value={value} 
