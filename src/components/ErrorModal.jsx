@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function ErrorModal({ onClose, info, canRetry, onRetry }) {
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div className="fixed inset-0 bg-transparent bg-opacity-50  flex items-center justify-center z-50">
       <div className="bg-white rounded-lg p-6 max-w-md mx-4">
         <div className="text-center">
           <div className="text-4xl mb-4">⚠️</div>
