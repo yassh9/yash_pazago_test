@@ -1,0 +1,310 @@
+@import "tailwindcss";
+
+/* Dark mode styles */
+.dark {
+  color-scheme: dark;
+}
+
+/* Mobile viewport and overflow handling */
+html, body {
+  height: 100vh;
+  height: 100dvh; /* Dynamic viewport height for mobile */
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+}
+
+#root {
+  height: 100vh;
+  height: 100dvh; /* Dynamic viewport height for mobile */
+  overflow: hidden;
+}
+
+/* Mobile safe area handling */
+.safe-area-inset-bottom {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.pb-safe {
+  padding-bottom: calc(1rem + env(safe-area-inset-bottom));
+}
+
+/* Mobile viewport height fixes */
+@supports (height: 100dvh) {
+  .h-mobile-screen {
+    height: 100dvh;
+  }
+}
+
+@supports not (height: 100dvh) {
+  .h-mobile-screen {
+    height: 100vh;
+  }
+}
+
+/* Enhanced responsive design */
+@media (max-width: 768px) {
+  html, body {
+    height: 100vh;
+    height: 100svh; /* Small viewport height for mobile browsers */
+    position: fixed;
+    overflow: hidden;
+    touch-action: manipulation;
+  }
+  
+  #root {
+    height: 100vh;
+    height: 100svh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+  }
+}
+
+/* Tablet responsive */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .sidebar-tablet {
+    width: 300px;
+  }
+  
+  .chat-container-tablet {
+    padding: 1rem;
+  }
+}
+
+/* Desktop responsive */
+@media (min-width: 1025px) {
+  .sidebar-desktop {
+    width: 320px;
+  }
+  
+  .chat-container-desktop {
+    padding: 1.5rem;
+  }
+}
+
+/* Custom scrollbars */
+.scrollbar-thin {
+  scrollbar-width: thin;
+}
+
+.scrollbar-thin::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 9999px;
+}
+
+.dark .scrollbar-thin::-webkit-scrollbar-thumb {
+  background: #4b5563;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb:hover {
+  background: #9ca3af;
+}
+
+.dark .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+  background: #6b7280;
+}
+
+/* Hide scrollbars completely when needed */
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-none {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+/* Prevent mobile touch scrolling on the main container */
+.prevent-scroll {
+  touch-action: none;
+  overscroll-behavior: none;
+}
+
+/* Enhanced mobile input handling */
+@media (max-width: 768px) {
+  .mobile-input-container {
+    position: sticky;
+    bottom: 0;
+    z-index: 20;
+    background: inherit;
+    padding: 0.5rem;
+    border-top: 1px solid #e5e7eb;
+  }
+  
+  .dark .mobile-input-container {
+    border-top-color: #374151;
+  }
+  
+  .chat-container-mobile {
+    padding-bottom: 120px !important;
+    scroll-padding-bottom: 120px;
+  }
+  
+  /* Better keyboard handling */
+  @supports (height: 100dvh) {
+    .chat-container-mobile {
+      max-height: calc(100dvh - 160px);
+    }
+  }
+  
+  /* Mobile sidebar overlay */
+  .mobile-sidebar-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 30;
+  }
+  
+  .mobile-sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 40;
+    width: 20rem;
+    transform: translateX(-100%);
+    transition: transform 300ms ease-in-out;
+  }
+  
+  .mobile-sidebar.open {
+    transform: translateX(0);
+  }
+}
+
+/* Desktop improvements */
+@media (min-width: 769px) {
+  .chat-container-desktop {
+    padding-bottom: 2rem;
+    scroll-padding-bottom: 2rem;
+  }
+  
+  .desktop-input-container {
+    position: relative;
+    margin-bottom: 1rem;
+  }
+}
+
+/* Animations */
+.animate-in {
+  animation-duration: 300ms;
+  animation-fill-mode: both;
+}
+
+.slide-in-from-bottom-2 {
+  animation-name: slideInFromBottom2;
+}
+
+@keyframes slideInFromBottom2 {
+  from {
+    transform: translateY(8px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.fade-in {
+  animation-name: fadeIn;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Theme transition */
+* {
+  transition: background-color 200ms ease-in-out, border-color 200ms ease-in-out, color 200ms ease-in-out;
+}
+
+/* Focus styles */
+.focus-ring {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+
+.focus-ring:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px #3b82f6;
+}
+
+.dark .focus-ring:focus {
+  box-shadow: 0 0 0 2px #3b82f6, 0 0 0 4px #1f2937;
+}
+
+/* Button improvements */
+.btn-hover-lift {
+  transition: all 200ms ease-in-out;
+}
+
+.btn-hover-lift:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.btn-hover-lift:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+/* Message animations */
+.message-appear {
+  animation: messageAppear 400ms ease-out;
+}
+
+@keyframes messageAppear {
+  from {
+    transform: translateY(20px) scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+/* Loading pulse improvements */
+.pulse-slow {
+  animation: pulse 3s infinite;
+}
+
+/* Enhanced mobile touch targets */
+@media (max-width: 768px) {
+  button, a, [role="button"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  input, textarea, select {
+    min-height: 44px;
+  }
+}
+
+/* Improved text selection */
+::selection {
+  background-color: #dbeafe;
+  color: #1e3a8a;
+}
+
+.dark ::selection {
+  background-color: #1e40af;
+  color: #dbeafe;
+}
