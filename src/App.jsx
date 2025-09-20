@@ -237,7 +237,7 @@ function AppContent() {
 
   return (
     <div className={`min-h-screen transition-colors duration-200 ${isMobile ? 'relative overflow-hidden' : 'flex'}`} 
-         style={isMobile ? { height: '100vh', height: '100dvh' } : {}}>
+         style={isMobile ? { height: '100vh', maxHeight: '100dvh' } : {}}>
       {/* Mobile overlay when sidebar is open */}
       {isMobile && sidebarOpen && (
         <div 
@@ -326,7 +326,7 @@ function AppContent() {
           {/* Container to limit width on desktop */}
           <div className={`flex-1 flex flex-col ${isMobile ? 'w-full' : 'max-w-4xl mx-auto w-full px-6'} h-full`}>
             {/* Message area - scrollable, takes available space, full height */}
-            <div className={`flex-1 overflow-y-auto ${isMobile ? 'pb-16 mb-2' : ''}`}>
+            <div className={`flex-1 overflow-y-auto ${isMobile ? 'pb-32' : ''}`}>
               <ChatWindow
                 messages={messageData}
                 isLoading={isLoading}
@@ -339,8 +339,8 @@ function AppContent() {
             </div>
             
             {/* Input Area - Fixed at bottom with extra mobile spacing */}
-            <div className={`${isMobile ? 'fixed bottom-0 left-0 right-0 z-30 px-4 py-3' : 'flex-shrink-0'}`} 
-                 style={isMobile ? { paddingBottom: 'calc(0.5rem + env(safe-area-inset-bottom) + 25px)' } : {}}>
+            <div className={`${isMobile ? 'fixed bottom-0 left-0 right-0 z-30 px-4 py-3 bg-inherit' : 'flex-shrink-0'}`} 
+                 style={isMobile ? { paddingBottom: 'calc(0.75rem + env(safe-area-inset-bottom))' } : {}}>
               <Searchbox 
                 SetValue={SetValue} 
                 value={value} 

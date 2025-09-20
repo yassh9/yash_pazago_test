@@ -49,7 +49,7 @@ export default function ChatWindow({
 
   return (
     <div className="w-full h-full">
-      <div className={`w-full h-full overflow-y-auto px-4 md:px-6 pt-8 pb-4 space-y-6 ${colors.bg.secondary} scrollbar-none`}>
+      <div className={`w-full h-full overflow-y-auto ${isMobile ? 'px-4' : 'px-4 md:px-6'} pt-8 ${isMobile ? 'pb-8' : 'pb-4'} space-y-6 ${colors.bg.secondary} scrollbar-none`}>
         {safeMessages.map((message, index) => (
           <div
             key={index}
