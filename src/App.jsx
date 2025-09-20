@@ -322,7 +322,7 @@ function AppContent() {
           {/* Container to limit width on desktop */}
           <div className={`flex-1 flex flex-col ${isMobile ? 'w-full' : 'max-w-4xl mx-auto w-full px-6'} h-full`}>
             {/* Message area - scrollable, takes available space, full height */}
-            <div className={`flex-1 overflow-y-auto ${isMobile ? 'pb-24 mb-2' : ''}`}>
+            <div className={`flex-1 overflow-y-auto ${isMobile ? 'pb-18 mb-2' : ''}`}>
               <ChatWindow
                 messages={messageData}
                 isLoading={isLoading}
